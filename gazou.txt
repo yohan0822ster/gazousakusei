@@ -1,0 +1,3 @@
+|photo_center
+|I@000.jpg|I@001.jpg|I@002.jpg|I@003.jpg|
+|M@▲▲▲|
