@@ -19,11 +19,18 @@
     attribution: '© OpenStreetMap contributors'
   }).addTo(map);
 
+  // ★ 永続化されたメモを復元（最短3行）
+  const list = JSON.parse(localStorage.getItem("memoList") || "[]");
+  list.forEach(m => {
+    L.marker([m.lat, m.lng]).addTo(map).bindPopup(m.memo);
+  });
+
   const locateControl = L.control({ position: 'topleft' });
 
   locateControl.onAdd = function () {
     const btn = L.DomUtil.create('button', '');
     btn.innerHTML = '🚩 現在地';
+
     btn.onclick = function () {
       navigator.geolocation.getCurrentPosition((pos) => {
         const lat = pos.coords.latitude;
@@ -34,11 +41,16 @@
           .openPopup();
 
         map.setView([lat, lng], 15);
-        // ★ メモ追加（3行だけ） ★
-  const memo = prompt("この場所のメモを入力");
-  if (memo) {
-    L.marker([lat, lng]).addTo(map).bindPopup(memo);
-  }
+
+        // ★ メモ追加（永続化3行だけ）
+        const memo = prompt("この場所のメモを入力");
+        if (memo) {
+          L.marker([lat, lng]).addTo(map).bindPopup(memo);
+
+          const list = JSON.parse(localStorage.getItem("memoList") || "[]");
+          list.push({ lat, lng, memo });
+          localStorage.setItem("memoList", JSON.stringify(list));
+        }
       });
     };
 
