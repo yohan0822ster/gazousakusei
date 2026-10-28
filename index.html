@@ -34,6 +34,11 @@
           .openPopup();
 
         map.setView([lat, lng], 15);
+        // ★ メモ追加（3行だけ） ★
+  const memo = prompt("この場所のメモを入力");
+  if (memo) {
+    L.marker([lat, lng]).addTo(map).bindPopup(memo);
+  }
       });
     };
 
