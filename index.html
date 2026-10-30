@@ -7,11 +7,16 @@
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <style>
     #map { height: 400px; }
+    #memos {
+      margin-top: 10px;
+      font-family: sans-serif;
+    }
   </style>
 </head>
 <body>
   <div id="map"></div>
-
+  <!-- メモ一覧 -->
+  <div id="memos"></div>
 <script>
   const map = L.map('map').setView([35.68, 139.76], 13);
 
@@ -19,12 +24,15 @@
     attribution: '© OpenStreetMap contributors'
   }).addTo(map);
 
-  // ★ 永続化されたメモを復元（最短3行）
+  //  永続化されたメモを復元（最短3行）
   const list = JSON.parse(localStorage.getItem("memoList") || "[]");
   list.forEach(m => {
     L.marker([m.lat, m.lng]).addTo(map).bindPopup(m.memo);
   });
-
+  // メモ一覧表示
+  document.getElementById("memos").innerHTML =
+    list.map(m => m.memo).join("<br>");
+  
   const locateControl = L.control({ position: 'topleft' });
 
   locateControl.onAdd = function () {
@@ -42,7 +50,7 @@
 
         map.setView([lat, lng], 15);
 
-        // ★ メモ追加（永続化3行だけ）
+        //  メモ追加（永続化3行だけ）
         const memo = prompt("この場所のメモを入力");
         if (memo) {
           L.marker([lat, lng]).addTo(map).bindPopup(memo);
@@ -50,6 +58,10 @@
           const list = JSON.parse(localStorage.getItem("memoList") || "[]");
           list.push({ lat, lng, memo });
           localStorage.setItem("memoList", JSON.stringify(list));
+
+        // ★一覧更新
+          document.getElementById("memos").innerHTML =
+            list.map(m => m.memo).join("<br>");
         }
       });
     };
