@@ -20,9 +20,10 @@
 <script>
   const map = L.map('map').setView([35.68, 139.76], 13);
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap contributors'
-  }).addTo(map);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap contributors'
+}).addTo(map);
+
 
   //  永続化されたメモを復元（最短3行）
   const list = JSON.parse(localStorage.getItem("memoList") || "[]");
