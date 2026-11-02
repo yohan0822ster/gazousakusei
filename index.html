@@ -20,8 +20,9 @@
 <script>
   const map = L.map('map').setView([35.68, 139.76], 13);
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '© OpenStreetMap contributors'
+L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png', {
+  attribution: '地理院タイル',
+  maxZoom: 18
 }).addTo(map);
 
 
