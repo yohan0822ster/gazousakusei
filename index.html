@@ -88,6 +88,19 @@ fetch("https://www.jma.go.jp/bosai/himawari/data/satimg/targetTimes_jp.json")
     }
   ).addTo(map);
 });
+
+  
+// 今後の雪（積雪深）
+fetch("https://www.jma.go.jp/bosai/snow/data/targetTimes.json")
+.then(r=>r.json())
+.then(t=>{
+  const d=t.at(-1);
+  L.tileLayer(
+    `https://www.jma.go.jp/bosai/snow/data/${d.basetime}/${d.validtime}/snowd/{z}/{x}/{y}.png`,
+    {opacity:0.6, attribution:'気象庁 今後の雪'}
+  ).addTo(map);
+});
+  
 </script>
 
 </body>
