@@ -62,6 +62,13 @@ const guide = await session.prompt(`
 latとlngには座標の値が入っています。その値から半径100メートル以内近くの名所や建物、店舗を5件ほど箇条書きで答えて
 `);
 
+
+
+
+
+
+
+        
 alert(guide);
         
         if (memo) {
@@ -87,6 +94,42 @@ alert(guide);
 
   locateControl.addTo(map);
 
+
+// ★★AI中央GPSボタン
+const aiControl = L.control({ position: 'topleft' });
+
+aiControl.onAdd = function () {
+
+  const btn = L.DomUtil.create('button', '');
+
+  btn.innerHTML = '🤖 AI';
+
+  btn.onclick = async function () {
+
+    const center = map.getCenter();
+
+    const session = await LanguageModel.create({
+      expectedOutputLanguages:["ja"]
+    });
+
+    const guide = await session.prompt(`
+緯度 ${center.lat}
+経度 ${center.lng}
+
+この付近の有名スポットを3件教えてください。
+`);
+
+    alert(guide);
+  };
+
+  return btn;
+};
+
+aiControl.addTo(map);
+
+
+
+  
 // ひまわり雲画像
 fetch("https://www.jma.go.jp/bosai/himawari/data/satimg/targetTimes_jp.json")
 .then(r=>r.json())
