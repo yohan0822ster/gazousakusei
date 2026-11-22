@@ -57,8 +57,8 @@ const session = await LanguageModel.create({
 });
 
 const guide = await session.prompt(`
-const lat = 35.3606;
-const lng = 138.7274;
+緯度 ${lat}
+経度 ${lng}
 latとlngには座標の値が入っています。その値から半径5km以内近くのスポットを1件だけ答えて
 `);
 
