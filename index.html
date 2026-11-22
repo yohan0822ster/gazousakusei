@@ -115,8 +115,8 @@ aiControl.onAdd = function () {
     const guide = await session.prompt(`
 緯度 ${center.lat}
 経度 ${center.lng}
-
-この付近の有名スポットを3件教えてください。
+center.latとcenter.lngには座標の値が入っています。
+座標の値に基づいて正確に付近の名所やスポットを3件教えてください。
 `);
 
     alert(guide);
