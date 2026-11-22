@@ -37,7 +37,7 @@ attribution: '<a href="https://maps.gsi.go.jp/development/ichiran.html">国土�
   locateControl.onAdd = function () {
     const btn = L.DomUtil.create('button', '');
     btn.innerHTML = '🚩 現在地';
-
+//★asynを追加
     btn.onclick = function () {
       navigator.geolocation.getCurrentPosition(async (pos) => {
         const lat = pos.coords.latitude;
@@ -51,13 +51,20 @@ attribution: '<a href="https://maps.gsi.go.jp/development/ichiran.html">国土�
 
         //  メモ追加（永続化3行だけ）
         const memo = prompt("この場所のメモを入力");
-
+//★promptAPIのモデルの追加
 const session = await LanguageModel.create({
   expectedOutputLanguages:["ja"]
 });
 
 const guide = await session.prompt(
-  "日本の首都は？"
+
+緯度 ${lat}
+経度 ${lng}
+
+この付近で有名な観光地、
+歴史スポット、
+自然スポットを3件挙げてください。
+日本語で簡潔に回答してください。
 );
 
 alert(guide);
