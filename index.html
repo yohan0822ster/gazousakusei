@@ -56,9 +56,11 @@ const session = await LanguageModel.create({
   expectedOutputLanguages:["ja"]
 });
 
-const guide = await session.prompt(
-  "日本の首都は？"
-);
+const guide = await session.prompt(`
+緯度:${lat}
+経度:${lng}
+近くの有名スポットを1件だけ答えて
+`);
 
 alert(guide);
         
