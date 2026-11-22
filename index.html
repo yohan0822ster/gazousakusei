@@ -57,14 +57,7 @@ const session = await LanguageModel.create({
 });
 
 const guide = await session.prompt(
-
-緯度 ${lat}
-経度 ${lng}
-
-この付近で有名な観光地、
-歴史スポット、
-自然スポットを3件挙げてください。
-日本語で簡潔に回答してください。
+  "日本の首都は？"
 );
 
 alert(guide);
