@@ -59,7 +59,7 @@ const session = await LanguageModel.create({
 const guide = await session.prompt(`
 緯度 ${lat}
 経度 ${lng}
-latとlngには座標の値が入っています。その値から半径5km以内近くの名所や建物、店舗をいくつか箇条書きで答えて
+latとlngには座標の値が入っています。その値から半径100メートル以内近くの名所や建物、店舗を5件ほど箇条書きで答えて
 `);
 
 alert(guide);
