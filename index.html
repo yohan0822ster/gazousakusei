@@ -104,24 +104,30 @@ aiControl.onAdd = function () {
 
   btn.innerHTML = '🤖 AI';
 
-  btn.onclick = async function () {
+btn.onclick = async function () {
 
-    const center = map.getCenter();
+  const center = map.getCenter();
 
-    const session = await LanguageModel.create({
-      expectedOutputLanguages:["ja"]
-    });
+  const q = prompt("質問を入力");
 
-    const guide = await session.prompt(`
+  if (!q) return;
+
+  const session = await LanguageModel.create({
+    expectedOutputLanguages:["ja"]
+  });
+
+  const guide = await session.prompt(`
+現在の地図中心
+
 緯度 ${center.lat}
 経度 ${center.lng}
-center.latとcenter.lngには座標の値が入っています。
-座標の値に基づいて正確に付近の名所やスポットを3件教えてください。
+
+ユーザーの質問:
+${q}
 `);
 
-    alert(guide);
-  };
-
+  alert(guide);
+};
   return btn;
 };
 
