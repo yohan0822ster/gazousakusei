@@ -55,14 +55,10 @@ attribution: '<a href="https://maps.gsi.go.jp/development/ichiran.html">国土�
         const session = await LanguageModel.create({
   expectedOutputLanguages:["ja"]
 });
-
-const guide = await session.prompt(`
-現在地:
-緯度 ${lat}
-経度 ${lng}
-
-この付近の見どころを50文字程度で教えて。
-`);
+        
+const guide = await session.prompt(
+  "日本の首都は？"
+);
 
 alert(guide);
         
