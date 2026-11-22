@@ -52,16 +52,7 @@ attribution: '<a href="https://maps.gsi.go.jp/development/ichiran.html">国土�
         //  メモ追加（永続化3行だけ）
         const memo = prompt("この場所のメモを入力");
 
-        const session = await LanguageModel.create({
-  expectedOutputLanguages:["ja"]
-});
-        
-const guide = await session.prompt(
-  "日本の首都は？"
-);
 
-alert(guide);
-        
         if (memo) {
           L.marker([lat, lng]).addTo(map).bindPopup(memo);
 
