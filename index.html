@@ -57,8 +57,8 @@ const session = await LanguageModel.create({
 });
 
 const guide = await session.prompt(`
-緯度:${lat}
-経度:${lng}
+const lat = 35.3606;
+const lng = 138.7274;
 近くの有名スポットを1件だけ答えて
 `);
 
