@@ -59,7 +59,7 @@ const session = await LanguageModel.create({
 const guide = await session.prompt(`
 const lat = 35.3606;
 const lng = 138.7274;
-近くの有名スポットを1件だけ答えて
+latとlngには座標の値が入っています。その値から近くの有名スポットを1件だけ答えて
 `);
 
 alert(guide);
