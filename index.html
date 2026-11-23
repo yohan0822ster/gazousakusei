@@ -51,25 +51,7 @@ attribution: '<a href="https://maps.gsi.go.jp/development/ichiran.html">国土�
 
         //  メモ追加（永続化3行だけ）
         const memo = prompt("この場所のメモを入力");
-//★promptAPIのモデルの追加
-const session = await LanguageModel.create({
-  expectedOutputLanguages:["ja"]
-});
 
-const guide = await session.prompt(`
-緯度 ${lat}
-経度 ${lng}
-latとlngには座標の値が入っています。その値から半径100メートル以内近くの名所や建物、店舗を5件ほど箇条書きで答えて
-`);
-
-
-
-
-
-
-
-        
-alert(guide);
         
         if (memo) {
           L.marker([lat, lng]).addTo(map).bindPopup(memo);
@@ -106,26 +88,32 @@ aiControl.onAdd = function () {
 
 btn.onclick = async function () {
 
-  const center = map.getCenter();
+const center = map.getCenter();
 
-  const q = prompt("質問を入力");
+const q = prompt("質問を入力");
 
-  if (!q) return;
+if (!q) return;
 
-  const session = await LanguageModel.create({
-    expectedOutputLanguages:["ja"]
-  });
+const list = JSON.parse(
+  localStorage.getItem("memoList") || "[]"
+);
 
-  const guide = await session.prompt(`
+const session = await LanguageModel.create({
+  expectedOutputLanguages:["ja"]
+});
+
+const guide = await session.prompt(`
 現在の地図中心
 
 緯度 ${center.lat}
 経度 ${center.lng}
 
+訪問履歴:
+${JSON.stringify(list)}
+
 ユーザーの質問:
 ${q}
 `);
-
   alert(guide);
 };
   return btn;
