@@ -112,11 +112,12 @@ const guide = await session.prompt(`
 
 です。
 
-訪問履歴は参考情報です。
-まず地図中心の座標を優先してください。
+行動データを以下に保存してあります。日付、位置情報、メモのテキストが格納されています。
 
-訪問履歴:
 ${JSON.stringify(list)}
+
+すべて取得して答えてください。
+
 
 質問:
 ${q}
@@ -152,3 +153,4 @@ fetch("https://www.jma.go.jp/bosai/himawari/data/satimg/targetTimes_jp.json")
 
 </body>
 </html>
+
