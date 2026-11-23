@@ -98,20 +98,23 @@ const list = JSON.parse(
   localStorage.getItem("memoList") || "[]"
 );
 
-const session = await LanguageModel.create({
-  expectedOutputLanguages:["ja"]
-});
-
 const guide = await session.prompt(`
-現在の地図中心
+あなたは地図アシスタントです。
+
+現在の地図中心は
 
 緯度 ${center.lat}
 経度 ${center.lng}
 
+です。
+
+訪問履歴は参考情報です。
+まず地図中心の座標を優先してください。
+
 訪問履歴:
 ${JSON.stringify(list)}
 
-ユーザーの質問:
+質問:
 ${q}
 `);
   alert(guide);
