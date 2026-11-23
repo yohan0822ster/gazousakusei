@@ -98,6 +98,10 @@ const list = JSON.parse(
   localStorage.getItem("memoList") || "[]"
 );
 
+const session = await LanguageModel.create({
+  expectedOutputLanguages:["ja"]
+});
+
 const guide = await session.prompt(`
 あなたは地図アシスタントです。
 
