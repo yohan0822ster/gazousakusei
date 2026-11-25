@@ -77,7 +77,22 @@ attribution: '<a href="https://maps.gsi.go.jp/development/ichiran.html">国土�
   locateControl.addTo(map);
 
 
-// ★★AI中央GPSボタン
+
+//★★Govデータ読み込み
+
+// 全国自治体データ
+let localgov = [];
+
+fetch("https://code4fukui.github.io/localgovjp/localgovjp.json")
+  .then(r => r.json())
+  .then(j => {
+    localgov = j;
+    console.log("自治体データ読込完了", localgov.length);
+  });
+
+
+
+// AI中央GPSボタン
 const aiControl = L.control({ position: 'topleft' });
 
 aiControl.onAdd = function () {
@@ -116,7 +131,12 @@ const guide = await session.prompt(`
 
 ${JSON.stringify(list)}
 
-すべて取得して答えてください。
+
+全国自治体データも以下に保存してあります。
+
+${JSON.stringify(localgov)}
+
+自治体データも参考にしながらべて取得して回答してください。
 
 
 質問:
