@@ -113,6 +113,24 @@ const list = JSON.parse(
   localStorage.getItem("memoList") || "[]"
 );
 
+
+   // ★★最短距離
+    const nearest = localgov.reduce((best, g) => {
+
+      const d =
+        (center.lat - Number(g.lat)) ** 2 +
+        (center.lng - Number(g.lng)) ** 2;
+
+      if (!best || d < best.d) {
+        return { d, g };
+      }
+
+      return best;
+
+    }, null);
+
+
+  
 const session = await LanguageModel.create({
   expectedOutputLanguages:["ja"]
 });
@@ -124,6 +142,13 @@ const guide = await session.prompt(`
 
 緯度 ${center.lat}
 経度 ${center.lng}
+
+です。
+
+現在地に最も近い自治体は
+
+${nearest.g.pref}
+${nearest.g.city}
 
 です。
 
